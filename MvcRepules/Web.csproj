@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <UserSecretsId>aspnet-MvcRepules-EF70FDEB-2215-4F6F-8054-412705FF1E8A</UserSecretsId>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="BLL\**" />
+    <Compile Remove="DAL\**" />
+    <Compile Remove="Model\**" />
+    <Compile Remove="ViewModel\**" />
+    <Content Remove="BLL\**" />
+    <Content Remove="DAL\**" />
+    <Content Remove="Model\**" />
+    <Content Remove="ViewModel\**" />
+    <EmbeddedResource Remove="BLL\**" />
+    <EmbeddedResource Remove="DAL\**" />
+    <EmbeddedResource Remove="Model\**" />
+    <EmbeddedResource Remove="ViewModel\**" />
+    <None Remove="BLL\**" />
+    <None Remove="DAL\**" />
+    <None Remove="Model\**" />
+    <None Remove="ViewModel\**" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.3" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.7.3" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="BLL\BLL.csproj" />
+    <ProjectReference Include="DAL\DAL.csproj" />
+    <ProjectReference Include="Model\Model.csproj" />
+  </ItemGroup>
+
+</Project>

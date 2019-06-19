@@ -1,0 +1,11 @@
+C:\Users\tremmel.marton\source\repos\MvcRepules\Model\bin\Debug\netcoreapp2.2\Model.deps.json
+C:\Users\tremmel.marton\source\repos\MvcRepules\Model\bin\Debug\netcoreapp2.2\Model.runtimeconfig.json
+C:\Users\tremmel.marton\source\repos\MvcRepules\Model\bin\Debug\netcoreapp2.2\Model.runtimeconfig.dev.json
+C:\Users\tremmel.marton\source\repos\MvcRepules\Model\bin\Debug\netcoreapp2.2\Model.dll
+C:\Users\tremmel.marton\source\repos\MvcRepules\Model\bin\Debug\netcoreapp2.2\Model.pdb
+C:\Users\tremmel.marton\source\repos\MvcRepules\Model\obj\Debug\netcoreapp2.2\Model.csproj.CoreCompileInputs.cache
+C:\Users\tremmel.marton\source\repos\MvcRepules\Model\obj\Debug\netcoreapp2.2\Model.AssemblyInfoInputs.cache
+C:\Users\tremmel.marton\source\repos\MvcRepules\Model\obj\Debug\netcoreapp2.2\Model.AssemblyInfo.cs
+C:\Users\tremmel.marton\source\repos\MvcRepules\Model\obj\Debug\netcoreapp2.2\Model.dll
+C:\Users\tremmel.marton\source\repos\MvcRepules\Model\obj\Debug\netcoreapp2.2\Model.pdb
+C:\Users\tremmel.marton\source\repos\MvcRepules\Model\obj\Debug\netcoreapp2.2\Model.csprojAssemblyReference.cache
