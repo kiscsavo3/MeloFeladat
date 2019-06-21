@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using MvcRepules.DAL;
+﻿using MvcRepules.DAL;
 using MvcRepules.Model;
 using MvcRepules.BLL.DTO;
 using System;

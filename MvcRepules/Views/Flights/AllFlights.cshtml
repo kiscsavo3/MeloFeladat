@@ -1,43 +1,120 @@
-﻿@model IEnumerable<MvcRepules.Model.Flight>
+﻿@model IEnumerable<MvcRepules.BLL.DTO.AllFlightsDto>
 @{
     ViewData["Title"] = "GetAllFlights";
 }
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FlightDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FlightTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <head>
+        <style>
+            .dropbtn {
+                background-color: #4CAF50;
+                color: white;
+                padding: 16px;
+                font-size: 16px;
+                border: none;
+            }
+
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f1f1f1;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+
+                .dropdown-content a {
+                    color: black;
+                    padding: 12px 16px;
+                    text-decoration: none;
+                    display: block;
+                }
+
+                    .dropdown-content a:hover {
+                        background-color: #ddd;
+                    }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            .dropdown:hover .dropbtn {
+                background-color: #3e8e41;
+            }
+        </style>
+    </head>
+    
+
+    <div class="dropdown">
+        <button class="dropbtn">Dropdown</button>
+        <div class="dropdown-content">
+            <a asp-route-id="0" asp-controller="Flights" asp-action="AllFlights">Accepted</a>
+            <a asp-route-id="1" asp-controller="Flights" asp-action="AllFlights">Denied</a>
+            <a asp-route-id="2" asp-controller="Flights" asp-action="AllFlights">Waiting For Accept</a>
+        </div>
+    </div>
+<div>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FlightDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FlightTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserId)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.PilotName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FlightDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FlightTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TakeoffPlace)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LandPlace)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PilotName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FlightDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FlightTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TakeoffPlace)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LandPlace)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        <a asp-controller="Flights" asp-action="Details" asp-route-id="@item.FlightId">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
 

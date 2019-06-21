@@ -18,5 +18,5 @@ namespace MvcRepules.Model
 
     }
     
-    public enum Status { Accepted, Denied, WaitingForAccept}
+    public enum Status { Accepted, Denied, Waiting_For_Accept}
 }

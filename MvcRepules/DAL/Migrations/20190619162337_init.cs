@@ -233,7 +233,7 @@ namespace DAL.Migrations
                         column: x => x.TakeoffPlaceId,
                         principalTable: "GlobalPoint",
                         principalColumn: "GlobalPointId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Flight_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -265,7 +265,7 @@ namespace DAL.Migrations
                         column: x => x.GlobalPointId,
                         principalTable: "GlobalPoint",
                         principalColumn: "GlobalPointId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

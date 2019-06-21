@@ -12,7 +12,5 @@ namespace MvcRepules.Model
         public string AirportName { get; set; }
         public Guid GlobalPointId { get; set; }
         public virtual GlobalPoint GlobalPoint { get; set; }
-
-
     }
 }

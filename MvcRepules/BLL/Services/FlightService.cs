@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GeoCoordinatePortable;
+using Microsoft.EntityFrameworkCore;
 using MvcRepules.BLL.DTO;
 using MvcRepules.DAL;
 using MvcRepules.Model;
@@ -18,88 +19,174 @@ namespace MvcRepules.BLL.Services
             _appDbContext = appDbContext;
         }
 
-        public async Task<IEnumerable> GetMyFlightsAsync(Guid UserId)
+        private async Task<List<FlightsDto>> GetFlightsAsync(Guid? UserId = null, int? status = null)
         {
+            List<FlightsDto> Flights = new List<FlightsDto>();
             var queryFlights = from f in _appDbContext.Flight select f;
-            var flights = await queryFlights.Where(f => f.UserId == UserId).ToListAsync();
-            var queryGps = from g in _appDbContext.GlobalPoint select g;
-            var globalPoints = await queryGps.ToListAsync();
-            var queryAirports = from a in _appDbContext.Airport select a;
-            List<Airport> airports = await queryAirports.ToListAsync();
-            string DepPlace = "";
-            string ArrPlace = "";
-            List<MyFlightsDto> myFlights = new List<MyFlightsDto>();
-            /*
-            for (int i = 0; i < flights.Count; i++)
+            List<Flight> flights = new List<Flight>();
+            if (UserId != null)
             {
-                GlobalPoint gbDep = globalPoints.SingleOrDefault(g => g.GlobalPointId == flights[i].GlobalPointTakeoffPlaceId);
-                GlobalPoint gbArr = globalPoints.SingleOrDefault(g => g.GlobalPointId == flights[i].GlobalPointLandPlaceId);
-                if(gbDep != null && gbArr != null)
+                flights = await queryFlights.Where(f => f.UserId == UserId)
+                    .Include(e => e.TakeoffPlace)
+                    .Include(e => e.LandPlace)
+                    .ToListAsync();
+            }
+            if (status != null)
+            {
+                switch (status)
                 {
-                    foreach (var item in airports)
-                    {
-                        if (CalculateDistance(item.GlobalPoint, gbDep) <= 3000.0)
-                        {
-                            DepPlace = item.AirportName;
-                        }
-                        if (CalculateDistance(item.GlobalPoint, gbDep) <= 3000.0)
-                        {
-                            ArrPlace = item.AirportName;
-                        }
-                        else
-                        {
-                            ArrPlace = "Terep";
-                        }
-                    }
-                    myFlights.Add(new MyFlightsDto
-                    {
-                        FlightDate = flights[i].FlightDate,
-                        TakeoffPlace = DepPlace,
-                        LandPlace = ArrPlace,
-                        FlightTime = flights[i].FlightTime,
-                        Status = flights[i].Status
-                    });
+                    case 0:
+                        flights = await queryFlights.Where(f => f.Status == Status.Accepted)
+                            .Include(e => e.User)
+                            .Include(e => e.TakeoffPlace)
+                            .Include(e => e.LandPlace)
+                            .ToListAsync();
+                        break;
+                    case 1:
+                        flights = await queryFlights.Where(f => f.Status == Status.Denied)
+                            .Include(e => e.User)
+                            .Include(e => e.TakeoffPlace)
+                            .Include(e => e.LandPlace)
+                            .ToListAsync();
+                        break;
+                    case 2:
+                        flights = await queryFlights.Where(f => f.Status == Status.Waiting_For_Accept)
+                             .Include(e => e.User)
+                             .Include(e => e.TakeoffPlace)
+                             .Include(e => e.LandPlace)
+                             .ToListAsync();
+                        break;
+                    default:
+                        flights = await queryFlights.Where(f => f.Status == Status.Waiting_For_Accept)
+                            .Include(e => e.User)
+                            .Include(e => e.TakeoffPlace)
+                            .Include(e => e.LandPlace)
+                            .ToListAsync();
+                        break;
                 }
             }
-            */
-            return myFlights;
+            List<Airport> airports = await _appDbContext.Airport
+                .Include(e => e.GlobalPoint)
+                .ToListAsync();
+            string DepPlace = "";
+            string ArrPlace = "";
+
+            foreach (var flight in flights)
+            {
+                DepPlace = airports.Find(m => CalculateDistance(m.GlobalPoint, flight.TakeoffPlace) <= 3000.0).AirportName;
+                if (airports.Find(m => CalculateDistance(m.GlobalPoint, flight.LandPlace) <= 3000.0) == null) { ArrPlace = "Terep"; }
+                else { ArrPlace = airports.Find(m => CalculateDistance(m.GlobalPoint, flight.LandPlace) <= 3000.0).AirportName; }
+
+                FlightsDto flightDto;
+                if (status != null)
+                {
+                    flightDto = new AllFlightsDto();
+                    (flightDto as AllFlightsDto).PilotName = flight.User.UserName;
+                    (flightDto as AllFlightsDto).Email = flight.User.Email;
+                }
+                else
+                {
+                    flightDto = new FlightsDto();
+                }
+
+                flightDto.FlightId = flight.FlightId;
+                flightDto.FlightDate = flight.FlightDate;
+                flightDto.TakeoffPlace = DepPlace;
+                flightDto.LandPlace = ArrPlace;
+                flightDto.FlightTime = flight.FlightTime;
+                flightDto.Status = flight.Status;
+                Flights.Add(flightDto);
+            }
+            return Flights; 
         }
+
+        public async Task<List<FlightsDto>> GetMyFlightsAsync(Guid UserId)
+        {
+            return await GetFlightsAsync(UserId);
+        }
+
         public double CalculateDistance(GlobalPoint start, GlobalPoint end)
         {
-            double rlat1 = Math.PI * start.Latitude / 180;
-            double rlat2 = Math.PI * end.Latitude / 180;
-            double theta = start.Longitude - end.Longitude;
-            double rtheta = Math.PI * theta / 180;
-            double dist =
-                Math.Sin(rlat1) * Math.Sin(rlat2) + Math.Cos(rlat1) *
-                Math.Cos(rlat2) * Math.Cos(rtheta);
-            dist = Math.Acos(dist);
-            dist = dist * 180 / Math.PI;
-            dist = dist * 60 * 1.1515;
+            GeoCoordinate pin1 = new GeoCoordinate(start.Latitude, start.Longitude);
+            GeoCoordinate pin2 = new GeoCoordinate(end.Latitude, end.Longitude);
 
-            return dist * 1609.344; // Méterben adja vissza a távolságot
+            double distanceBetween = pin1.GetDistanceTo(pin2);
+
+            return distanceBetween;
         }
 
-        public async Task<IEnumerable> GetAllFlightsAsync(int status)
+        public async Task<List<AllFlightsDto>> GetAllFlightsAsync(int status)
         {
-            IQueryable<Flight> flights = from m in _appDbContext.Flight select m;
-            IList<Flight> result = new List<Flight>();
-            switch (status)
+            return (await GetFlightsAsync(null, status))
+                .Select(e => e as AllFlightsDto).ToList();
+        }
+
+        public async Task<FlightsDto> GetSelectedFlightPilotAsync(Guid FlightId)
+        {          
+            var selectedFlight = await  _appDbContext.Flight
+                .Include(e => e.TakeoffPlace)
+                .Include(e => e.LandPlace)
+                .FirstOrDefaultAsync(f => f.FlightId == FlightId);
+
+            var airports = await _appDbContext.Airport
+                .Include(e => e.GlobalPoint)
+                .ToListAsync();
+
+            string ArrPlace = "";
+            string DepPlace = airports.Find(m => CalculateDistance(m.GlobalPoint, selectedFlight.TakeoffPlace) <= 3000.0).AirportName;
+            if (airports.Find(m => CalculateDistance(m.GlobalPoint, selectedFlight.LandPlace) <= 3000.0) == null) { ArrPlace = "Terep"; }
+            else { ArrPlace = airports.Find(m => CalculateDistance(m.GlobalPoint, selectedFlight.LandPlace) <= 3000.0).AirportName; }
+            return new FlightsDto()
             {
-                case 0:
-                    result = await flights.Where(m => m.Status == Status.Accepted).ToListAsync();
-                    break;
-                case 1:
-                    result = await flights.Where(m => m.Status == Status.Denied).ToListAsync();
-                    break;
-                case 2:
-                    result = await flights.Where(m => m.Status == Status.WaitingForAccept).ToListAsync();
-                    break;
-                default:
-                    result = await flights.Where(m => m.Status == Status.WaitingForAccept).ToListAsync();
-                    break;
-            }
-            return result;
+                FlightId = selectedFlight.FlightId,
+                FlightDate = selectedFlight.FlightDate,
+                FlightTime = selectedFlight.FlightTime,
+                Status = selectedFlight.Status,
+                TakeoffPlace = DepPlace,
+                LandPlace = ArrPlace
+            };
+        }
+
+        public async Task<AllFlightsDto> GetSelectedFlightAdminAsync(Guid FlightId)
+        {
+            FlightsDto flightsDto = await GetSelectedFlightPilotAsync(FlightId);
+            var selectedFlight = await _appDbContext.Flight
+                .Include(e => e.User)
+                .FirstOrDefaultAsync(f => f.FlightId == FlightId);
+            return new AllFlightsDto()
+            {
+                FlightId = flightsDto.FlightId,
+                FlightDate = flightsDto.FlightDate,
+                FlightTime = flightsDto.FlightTime,
+                Status = flightsDto.Status,
+                TakeoffPlace = flightsDto.TakeoffPlace,
+                LandPlace = flightsDto.LandPlace,
+                PilotName = selectedFlight.User.UserName,
+                Email = selectedFlight.User.Email
+            };
+        }
+
+        public async Task<bool> EditStatusToAccept(Guid FlightId)
+        {
+            var flight = await _appDbContext.Flight.FirstOrDefaultAsync(f => f.FlightId == FlightId);
+            //var newFlight = flight;
+            //newFlight.Status = Status.Accepted;
+            //_appDbContext.Flight.Remove(flight);
+            //_appDbContext.Flight.Add(newFlight);
+            flight.Status = Status.Accepted;
+            _appDbContext.Flight.Update(flight);
+            await _appDbContext.SaveChangesAsync();
+            return true;
+        }
+        public async Task<bool> EditStatusToDeny(Guid FlightId)
+        {
+            var flight = await _appDbContext.Flight.FirstOrDefaultAsync(f => f.FlightId == FlightId);
+            var newFlight = flight;
+            newFlight.Status = Status.Denied;
+            _appDbContext.Flight.Remove(flight);
+            _appDbContext.Flight.Add(newFlight);
+            await _appDbContext.SaveChangesAsync();
+            return true;
         }
 
     }

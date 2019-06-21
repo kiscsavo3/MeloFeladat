@@ -25,8 +25,7 @@ namespace BLL.Services
 
         public void DataMining()
         {
-            IQueryable<PilotLog> pilotlogs = from m in _appDbContext.PilotLog select m;
-            List<PilotLog> pilotLogs = pilotlogs.ToList();
+            List<PilotLog> pilotLogs = _appDbContext.PilotLog.ToList();
             foreach (var pilotLog in pilotLogs)
             {
                 string text = System.Text.Encoding.UTF8.GetString(pilotLog.File);
@@ -110,7 +109,7 @@ namespace BLL.Services
                     FlightTime = flightTime,
                     TakeoffPlace = gpDep,
                     LandPlace = gpArr,
-                    Status = Status.WaitingForAccept,
+                    Status = Status.Waiting_For_Accept,
                     UserId = pilotLog.UserId,
                 };
 

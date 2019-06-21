@@ -52,6 +52,15 @@
           "lib/netcoreapp2.1/EPPlus.dll": {}
         }
       },
+      "GeoCoordinate.NetCore/1.0.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard1.6/GeoCoordinate.NetCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.6/GeoCoordinate.NetCore.dll": {}
+        }
+      },
       "Hangfire.Core/1.7.3": {
         "type": "package",
         "dependencies": {
@@ -4801,6 +4810,19 @@
         "lib/netstandard2.0/EPPlus.dll",
         "lib/netstandard2.0/EPPlus.xml",
         "readme.txt"
+      ]
+    },
+    "GeoCoordinate.NetCore/1.0.0.1": {
+      "sha512": "VrR5MLkh0u2qka79JcQ/GUrgHwGidayCA7nKy2430qYX/JHdrHLgwp1MuBTSsygWs0s2V6GQ0Hp8HUMatHiWFw==",
+      "type": "package",
+      "path": "geocoordinate.netcore/1.0.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "geocoordinate.netcore.1.0.0.1.nupkg.sha512",
+        "geocoordinate.netcore.nuspec",
+        "lib/netstandard1.6/GeoCoordinate.NetCore.deps.json",
+        "lib/netstandard1.6/GeoCoordinate.NetCore.dll"
       ]
     },
     "Hangfire.Core/1.7.3": {
@@ -12806,6 +12828,7 @@
     ".NETCoreApp,Version=v2.2": [
       "DAL >= 1.0.0",
       "EPPlus >= 4.5.3.2",
+      "GeoCoordinate.NetCore >= 1.0.0.1",
       "Hangfire.Core >= 1.7.3",
       "Microsoft.NETCore.App >= 2.2.0"
     ]
@@ -12858,6 +12881,10 @@
           "EPPlus": {
             "target": "Package",
             "version": "[4.5.3.2, )"
+          },
+          "GeoCoordinate.NetCore": {
+            "target": "Package",
+            "version": "[1.0.0.1, )"
           },
           "Hangfire.Core": {
             "target": "Package",

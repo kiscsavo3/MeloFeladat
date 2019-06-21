@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "04f48d5e66d091b969d348ad846a56215c8645be"
+    "signature": "1e06a0b068be36589cf2746e8759adbfcbb061ba"
   },
   "compilationOptions": {},
   "targets": {
@@ -10,6 +10,7 @@
         "dependencies": {
           "DAL": "1.0.0",
           "EPPlus": "4.5.3.2",
+          "GeoCoordinate.NetCore": "1.0.0.1",
           "Hangfire.Core": "1.7.3"
         },
         "runtime": {
@@ -59,6 +60,14 @@
           "lib/netcoreapp2.1/EPPlus.dll": {
             "assemblyVersion": "4.5.3.2",
             "fileVersion": "4.5.3.2"
+          }
+        }
+      },
+      "GeoCoordinate.NetCore/1.0.0.1": {
+        "runtime": {
+          "lib/netstandard1.6/GeoCoordinate.NetCore.dll": {
+            "assemblyVersion": "1.0.0.1",
+            "fileVersion": "1.0.0.1"
           }
         }
       },
@@ -3779,6 +3788,13 @@
       "sha512": "sha512-JoEDkHEcYio3uV8T9+anjfB6x6hirEW9zdO4Ibyd8BDrct0tCp6vMqvKFpAcPNE6TVRG03y1bskFlJXbXiCJxg==",
       "path": "epplus/4.5.3.2",
       "hashPath": "epplus.4.5.3.2.nupkg.sha512"
+    },
+    "GeoCoordinate.NetCore/1.0.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VrR5MLkh0u2qka79JcQ/GUrgHwGidayCA7nKy2430qYX/JHdrHLgwp1MuBTSsygWs0s2V6GQ0Hp8HUMatHiWFw==",
+      "path": "geocoordinate.netcore/1.0.0.1",
+      "hashPath": "geocoordinate.netcore.1.0.0.1.nupkg.sha512"
     },
     "Hangfire.Core/1.7.3": {
       "type": "package",

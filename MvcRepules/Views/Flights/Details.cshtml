@@ -1,0 +1,64 @@
+﻿@model MvcRepules.BLL.DTO.AllFlightsDto
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h5>Details about selected flight</h5>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PilotName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PilotName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FlightDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FlightDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FlightTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FlightTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TakeoffPlace)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TakeoffPlace)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LandPlace)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LandPlace)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+</div>
+@if (Model.Status == MvcRepules.Model.Status.Waiting_For_Accept)
+{
+<div>
+
+    <a asp-controller="Flights" asp-action="EditToAccept" asp-route-id=@Model.FlightId>Accept | </a>
+    <a asp-controller="Flights" asp-action="EditToDeny" asp-route-id="@Model.FlightId">Deny</a>
+</div>
+}
+<div>
+    <a asp-action="AllFlights" asp-route-id="2">Back to List</a>
+</div>

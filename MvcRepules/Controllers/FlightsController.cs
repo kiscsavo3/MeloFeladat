@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -36,6 +34,39 @@ namespace Web.Controllers
         {
             var flights = await _flightService.GetMyFlightsAsync(GetUserId());
             return View(flights);
+        }
+
+        //give a selected flight's deteils back
+        [Authorize(Roles = "Admin")]
+        [HttpGet]       
+        public async Task<IActionResult> Details(Guid Id)
+        {
+            var flight = await _flightService.GetSelectedFlightAdminAsync(Id);
+            return View(flight);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> EditToAccept(Guid Id)
+        {
+            await _flightService.EditStatusToAccept(Id);
+            return RedirectToAction("Details");
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> EditToDeny(Guid Id)
+        {
+            await _flightService.EditStatusToDeny(Id);
+            return RedirectToAction("Details");
+        }
+
+        [Authorize(Roles = "Pilot")]
+        [HttpGet]
+        public async Task<IActionResult> PilotDetails(Guid Id)
+        {
+            var flight = await _flightService.GetSelectedFlightPilotAsync(Id);
+            return View(flight);
         }
 
         // give loged in user's id

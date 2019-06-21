@@ -45,14 +45,12 @@ namespace BLL.Services
                                 GlobalPoint = globalPoint
                             };
 
-                            IQueryable<Airport> airports = from m in _appDbContext.Airport select m;
-                            IQueryable<GlobalPoint> gp = from g in _appDbContext.GlobalPoint select g;
-                            Airport isExist = airports.SingleOrDefault(m => m.AirportName == airport.AirportName);
+                            Airport isExist = _appDbContext.Airport
+                                .SingleOrDefault(m => m.AirportName == airport.AirportName);
                             if (isExist != null)
                             {
-                                GlobalPoint itHasToDelete = gp.SingleOrDefault(g => g.GlobalPointId == isExist.GlobalPointId);
                                 _appDbContext.Airport.Remove(isExist);
-                                _appDbContext.GlobalPoint.Remove(itHasToDelete);
+                                _appDbContext.GlobalPoint.Remove(isExist.GlobalPoint);
                             }
                             await _appDbContext.GlobalPoint.AddAsync(globalPoint);
                             await _appDbContext.Airport.AddAsync(airport);
