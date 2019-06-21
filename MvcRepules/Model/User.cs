@@ -12,9 +12,12 @@ namespace MvcRepules.Model
             PilotLogs = new HashSet<PilotLog>();
             Flights = new HashSet<Flight>();
         }
+
+        // Nyugodtan lehet minden tábla kulcsa sima Id, úgy is felismeri az EF
         public Guid UserId { get; set; }
 
         [DefaultValue(false)]
+        /// Inkább legyen sima bool 
         public Boolean IsAdmin { get; set; }
 
         [DefaultValue(false)]

@@ -40,6 +40,10 @@ namespace Web.Controllers
             {
                 if(await _logUploadService.LogUploadAsync(logUploadDto, GetUserId()))
                 {
+                    // Ezt inkább ne itt hívjuk, hanem configolj be egy RecurringJob-ot, 
+                    // ami pl percenként lefut és megcsinálja ugyanezt, amit most itt direkbe elindítasz.     
+                    // Ez is okés olyan szempontból, hogy nem blokkolja a controllert, 
+                    // viszont úgy a controller nem is tudna a JOB-ról 
                     ViewBag.Message = "Upload Success!";
                     _backGroundProcessService.RunInBackground();
                 }

@@ -9,3 +9,14 @@ C:\Users\tremmel.marton\source\repos\MvcRepules\Model\obj\Debug\netcoreapp2.2\Mo
 C:\Users\tremmel.marton\source\repos\MvcRepules\Model\obj\Debug\netcoreapp2.2\Model.dll
 C:\Users\tremmel.marton\source\repos\MvcRepules\Model\obj\Debug\netcoreapp2.2\Model.pdb
 C:\Users\tremmel.marton\source\repos\MvcRepules\Model\obj\Debug\netcoreapp2.2\Model.csprojAssemblyReference.cache
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\Model\bin\Debug\netcoreapp2.2\Model.deps.json
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\Model\bin\Debug\netcoreapp2.2\Model.runtimeconfig.json
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\Model\bin\Debug\netcoreapp2.2\Model.runtimeconfig.dev.json
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\Model\bin\Debug\netcoreapp2.2\Model.dll
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\Model\bin\Debug\netcoreapp2.2\Model.pdb
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\Model\obj\Debug\netcoreapp2.2\Model.csprojAssemblyReference.cache
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\Model\obj\Debug\netcoreapp2.2\Model.csproj.CoreCompileInputs.cache
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\Model\obj\Debug\netcoreapp2.2\Model.AssemblyInfoInputs.cache
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\Model\obj\Debug\netcoreapp2.2\Model.AssemblyInfo.cs
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\Model\obj\Debug\netcoreapp2.2\Model.dll
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\Model\obj\Debug\netcoreapp2.2\Model.pdb

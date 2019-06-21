@@ -12,3 +12,17 @@ C:\Users\tremmel.marton\source\repos\MvcRepules\BLL\bin\Debug\netcoreapp2.2\Mode
 C:\Users\tremmel.marton\source\repos\MvcRepules\BLL\obj\Debug\netcoreapp2.2\BLL.csproj.CopyComplete
 C:\Users\tremmel.marton\source\repos\MvcRepules\BLL\obj\Debug\netcoreapp2.2\BLL.dll
 C:\Users\tremmel.marton\source\repos\MvcRepules\BLL\obj\Debug\netcoreapp2.2\BLL.pdb
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\BLL\bin\Debug\netcoreapp2.2\BLL.deps.json
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\BLL\bin\Debug\netcoreapp2.2\BLL.dll
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\BLL\bin\Debug\netcoreapp2.2\BLL.pdb
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\BLL\bin\Debug\netcoreapp2.2\DAL.dll
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\BLL\bin\Debug\netcoreapp2.2\Model.dll
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\BLL\bin\Debug\netcoreapp2.2\DAL.pdb
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\BLL\bin\Debug\netcoreapp2.2\Model.pdb
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\BLL\obj\Debug\netcoreapp2.2\BLL.csprojAssemblyReference.cache
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\BLL\obj\Debug\netcoreapp2.2\BLL.csproj.CoreCompileInputs.cache
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\BLL\obj\Debug\netcoreapp2.2\BLL.AssemblyInfoInputs.cache
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\BLL\obj\Debug\netcoreapp2.2\BLL.AssemblyInfo.cs
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\BLL\obj\Debug\netcoreapp2.2\BLL.csproj.CopyComplete
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\BLL\obj\Debug\netcoreapp2.2\BLL.dll
+C:\Users\kulacs.peter\Desktop\proba\MeloFeladat\MvcRepules\BLL\obj\Debug\netcoreapp2.2\BLL.pdb

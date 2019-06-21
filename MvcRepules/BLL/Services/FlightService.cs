@@ -37,6 +37,9 @@ namespace MvcRepules.BLL.Services
                 {
                     case 0:
                         flights = await queryFlights.Where(f => f.Status == Status.Accepted)
+                            /// Úgy kevesebbet kell copyzni, ha először csinálsz egy query-t, hívsz rá include-okat
+                            /// és a swuitch-be csak a where feltételt hívod rá... 
+                            /// query = query.Where(f => f.Status == Status.Accepted) pl 
                             .Include(e => e.User)
                             .Include(e => e.TakeoffPlace)
                             .Include(e => e.LandPlace)
@@ -89,6 +92,8 @@ namespace MvcRepules.BLL.Services
                     flightDto = new FlightsDto();
                 }
 
+                /// Ezeknek a lespórolására jó az Automapper  - Mapper.Map<FlightsDto>(flight)
+                /// Azt is ajánlom kipróbálni majd 
                 flightDto.FlightId = flight.FlightId;
                 flightDto.FlightDate = flight.FlightDate;
                 flightDto.TakeoffPlace = DepPlace;
